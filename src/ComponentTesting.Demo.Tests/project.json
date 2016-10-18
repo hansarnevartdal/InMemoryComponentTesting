@@ -1,0 +1,40 @@
+{
+  "version": "1.0.0-*",
+  "testRunner": "xunit",
+
+  "dependencies": {
+    "NETStandard.Library": "1.6.0",
+    "xunit": "2.2.0-beta3-build3402",
+    "xunit.abstractions": "2.0.1",
+    "xunit.core": "2.2.0-beta3-build3402",
+    "FakeItEasy.Analyzer": "2.4.0-netstd-build000033",
+    "FakeItEasy": "2.4.0-netstd-build000033",
+    "xunit.runner.visualstudio": "2.1.0",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "ComponentDemo": {
+      "target": "project"
+    },
+    "ComponentTesting.Http.Auth0": {
+      "target": "project"
+    }
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": [
+        "portable-net451+win8"
+      ],
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.0.1"
+        }
+      }
+    }
+  },
+
+  "runtimes": {
+    "win10-x86": {},
+    "win10-x64": {}
+  }
+}
