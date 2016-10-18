@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ComponentDemo", "src\ComponentDemo\ComponentDemo.xproj", "{242A1663-3877-4B9E-BE2D-454DEBC54AD6}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ComponentTesting.Demo.Tests", "src\ComponentTesting.Demo.Tests\ComponentTesting.Demo.Tests.xproj", "{1B3B8D02-0592-4C79-A755-73540E681F1F}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ComponentTesting.Demo.Tests", "src\ComponentDemo.Tests\ComponentDemo.Tests.xproj", "{1B3B8D02-0592-4C79-A755-73540E681F1F}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ComponentTesting.Http", "src\ComponentTesting.Http\ComponentTesting.Http.xproj", "{2FD14CDB-E4D1-4ED7-9880-8152D5E37632}"
 EndProject
