@@ -8,6 +8,8 @@ namespace ComponentTesting.Demo.Tests.AuthorizationTests
 {
     public class WhenAuthorizationRequired
     {
+        private const string ApiEndpointRequiringAuthorization = "/api/require/authorization";
+
         [Fact(DisplayName = "Valid token is authorized")]
         public async void ValidTokenIsAuthorized()
         {
@@ -15,7 +17,7 @@ namespace ComponentTesting.Demo.Tests.AuthorizationTests
             var fixture = new AuthorizedTestFixture<DemoStartup>();
 
             // Act
-            var request = new HttpRequestMessage(HttpMethod.Get, "/api/require/authorization");
+            var request = new HttpRequestMessage(HttpMethod.Get, ApiEndpointRequiringAuthorization);
             request.Headers.Add("Authorization", "Bearer " + fixture.TokenService.GetToken());
             var response = await fixture.HttpClient.SendAsync(request);
 
@@ -31,7 +33,7 @@ namespace ComponentTesting.Demo.Tests.AuthorizationTests
             var fixture = new AuthorizedTestFixture<DemoStartup>();
 
             // Act
-            var request = new HttpRequestMessage(HttpMethod.Get, "/api/require/authorization");
+            var request = new HttpRequestMessage(HttpMethod.Get, ApiEndpointRequiringAuthorization);
             request.Headers.Add("Authorization", "Bearer " + fixture.TokenService.GetExpiredToken());
             var response = await fixture.HttpClient.SendAsync(request);
 

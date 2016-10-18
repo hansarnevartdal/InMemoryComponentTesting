@@ -10,6 +10,8 @@ namespace ComponentTesting.Demo.Tests.AuthorizationTests
 {
     public class WhenAdminRoleRequired
     {
+        private const string ApiEndpointRquiringAdminRole = "/api/require/role/admin";
+
         [Fact(DisplayName = "Token with admin role is given access")]
         public async void TokenWithAdminRoleIsAuthorized()
         {
@@ -21,7 +23,7 @@ namespace ComponentTesting.Demo.Tests.AuthorizationTests
             };
 
             // Act
-            var request = new HttpRequestMessage(HttpMethod.Get, "/api/require/role/admin");
+            var request = new HttpRequestMessage(HttpMethod.Get, ApiEndpointRquiringAdminRole);
             request.Headers.Add("Authorization", "Bearer " + fixture.TokenService.GetToken(claims));
             var response = await fixture.HttpClient.SendAsync(request);
 
@@ -37,7 +39,7 @@ namespace ComponentTesting.Demo.Tests.AuthorizationTests
             var fixture = new AuthorizedTestFixture<DemoStartup>();
 
             // Act
-            var request = new HttpRequestMessage(HttpMethod.Get, "/api/require/role/admin");
+            var request = new HttpRequestMessage(HttpMethod.Get, ApiEndpointRquiringAdminRole);
             request.Headers.Add("Authorization", "Bearer " + fixture.TokenService.GetToken());
             var response = await fixture.HttpClient.SendAsync(request);
 
