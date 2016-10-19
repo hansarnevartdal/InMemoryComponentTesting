@@ -9,10 +9,10 @@
     "BouncyCastle.CoreClr": "1.0.0",
     "Newtonsoft.Json": "9.0.1",
     "System.Collections.NonGeneric": "4.0.1",
-    "ComponentTesting.Http": {
+    "ComponentBoundaries.Http.Auth0": {
       "target": "project"
     },
-    "ComponentBoundaries.Http.Auth0": {
+    "ComponentBoundaries.Testing.Http": {
       "target": "project"
     }
   },

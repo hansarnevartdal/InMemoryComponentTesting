@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ComponentTesting.Http.Auth0.Models
+namespace ComponentBoundaries.Testing.Http.Auth0.Models
 {
     public class Jwks
     {

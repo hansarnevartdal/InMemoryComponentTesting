@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace ComponentTesting.Http.Auth0.Models
+namespace ComponentBoundaries.Testing.Http.Auth0.Models
 {
     public class OpenIdConfiguration
     {

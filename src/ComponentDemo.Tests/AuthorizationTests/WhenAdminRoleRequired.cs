@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using Component.Demo;
-using ComponentTesting.Http.Auth0;
+using ComponentBoundaries.Testing.Http.Auth0;
 using Xunit;
 
 namespace ComponentTesting.Demo.Tests.AuthorizationTests

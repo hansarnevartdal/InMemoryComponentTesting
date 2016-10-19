@@ -14,7 +14,7 @@
     "ComponentDemo": {
       "target": "project"
     },
-    "ComponentTesting.Http.Auth0": {
+    "ComponentBoundaries.Testing.Http.Auth0": {
       "target": "project"
     }
   },

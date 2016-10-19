@@ -1,19 +1,20 @@
-﻿using System.Net.Http;
-using ComponentBoundaries.Http;
+﻿using ComponentBoundaries.Http;
 using ComponentBoundaries.Http.Auth0.Settings;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace ComponentTesting.Http.Auth0
+namespace ComponentBoundaries.Testing.Http.Auth0
 {
     public class AuthorizedTestFixture<TStartup> : TestFixture<TStartup> where TStartup : class
     {
-        public AuthorizedTestFixture(Auth0Settings auth0Settings = null, TestTokenService tokenService = null, HttpMessageHandler httpMessageHandler = null)
+        public AuthorizedTestFixture(Auth0Settings auth0Settings = null, TestTokenService tokenService = null, TestHttpMessageHandler httpMessageHandler = null, IServiceCollection serviceCollection = null)
         {
             var auth0SettingsOrDefault = auth0Settings ?? GetDefaultAuth0Settings();
             var tokenServiceOrDefault = tokenService ?? GetDefaultTokenService(auth0SettingsOrDefault);
-            var httpMessageHandlerOrDefault = httpMessageHandler ?? GetDefaultHttpMessageHandler(auth0SettingsOrDefault, tokenServiceOrDefault);
+            var httpMessageHandlerOrDefault = httpMessageHandler ?? GetDefaultHttpMessageHandler();
+            httpMessageHandlerOrDefault.ConfigureFakeAuth0Authority(auth0SettingsOrDefault, tokenServiceOrDefault);
 
             var webHostBuilder = new WebHostBuilder()
                 .UseStartup<TStartup>()
@@ -25,6 +26,11 @@ namespace ComponentTesting.Http.Auth0
                         settings.Auth0Domain = auth0SettingsOrDefault.Auth0Domain;
                     });
                     services.AddSingleton<IHttpMessageHandlerAccessor>(provider => new HttpMessageHandlerAccessor(httpMessageHandlerOrDefault));
+
+                    if (serviceCollection != null)
+                    {
+                        services.Add(serviceCollection);
+                    }
                 });
 
             var server = new TestServer(webHostBuilder);
@@ -39,11 +45,9 @@ namespace ComponentTesting.Http.Auth0
             return  new TestTokenService(auth0SettingsOrDefault);
         }
 
-        private static HttpMessageHandler GetDefaultHttpMessageHandler(Auth0Settings auth0Settings, TestTokenService tokenService)
+        private static TestHttpMessageHandler GetDefaultHttpMessageHandler()
         {
-            var httpMessageHandler = new TestHttpMessageHandler();
-            httpMessageHandler.ConfigureFakeAuth0Authority(auth0Settings, tokenService);
-            return httpMessageHandler;
+            return new TestHttpMessageHandler();
         }
 
         private static Auth0Settings GetDefaultAuth0Settings()

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Net;
 using ComponentBoundaries.Http.Auth0.Settings;
-using ComponentTesting.Http.Auth0.Models;
+using ComponentBoundaries.Testing.Http.Auth0.Models;
 
-namespace ComponentTesting.Http.Auth0
+namespace ComponentBoundaries.Testing.Http.Auth0
 {
     public static class TestHttpMessageHandlerExtensions
     {

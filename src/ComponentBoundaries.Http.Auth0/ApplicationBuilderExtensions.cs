@@ -15,12 +15,12 @@ namespace ComponentBoundaries.Http.Auth0
     {
         public static void UseAuth0Tokens(
             this IApplicationBuilder app, 
-            IOptions<Auth0Settings> appSettingsAccessor, 
+            IOptions<Auth0Settings> auth0SettingsAccessor, 
             IHttpMessageHandlerAccessor httpMessageHandlerAccessor,
             ILoggerFactory loggerFactory)
         {
             var logger = loggerFactory.CreateLogger("Auth0");
-            var appSettings = appSettingsAccessor.Value;
+            var appSettings = auth0SettingsAccessor.Value;
 
             var jwtOptions = new JwtBearerOptions
             {

@@ -4,10 +4,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using ComponentBoundaries.Http.Auth0.Settings;
-using ComponentTesting.Http.Auth0.Helpers;
+using ComponentBoundaries.Testing.Http.Auth0.Helpers;
 using Microsoft.IdentityModel.Tokens;
 
-namespace ComponentTesting.Http.Auth0
+namespace ComponentBoundaries.Testing.Http.Auth0
 {
     public class TestTokenService
     {

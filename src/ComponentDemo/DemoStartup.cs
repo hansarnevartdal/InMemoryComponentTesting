@@ -1,4 +1,6 @@
-﻿using ComponentBoundaries.Http;
+﻿using Component.Demo.Facades;
+using Component.Demo.Settings;
+using ComponentBoundaries.Http;
 using ComponentBoundaries.Http.Auth0;
 using ComponentBoundaries.Http.Auth0.Settings;
 using Microsoft.AspNetCore.Builder;
@@ -31,10 +33,12 @@ namespace Component.Demo
         {
             services
                 .AddOptions()
-                .Configure<Auth0Settings>(Configuration.GetSection("Auth0Settings"));
+                .Configure<Auth0Settings>(Configuration.GetSection("Auth0Settings"))
+                .Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             services.TryAddSingleton<IHttpMessageHandlerAccessor, HttpMessageHandlerAccessor>();
             services.TryAddSingleton<IHttpClientFactory, HttpClientFactory>();
+            services.AddScoped<IOtherComponentFacade, OtherComponentFacade>();
 
             services
                 .AddMvc()
@@ -45,14 +49,14 @@ namespace Component.Demo
             IApplicationBuilder app, 
             IHostingEnvironment env, 
             ILoggerFactory loggerFactory,
-            IOptions<Auth0Settings> appSettingsAccessor, 
+            IOptions<Auth0Settings> auth0SettingsAccessor, 
             IHttpMessageHandlerAccessor httpMessageHandlerAccessor)
         {
             loggerFactory.AddConsole();
             loggerFactory.AddDebug();
             loggerFactory.AddSerilog();
             
-            app.UseAuth0Tokens(appSettingsAccessor, httpMessageHandlerAccessor, loggerFactory);
+            app.UseAuth0Tokens(auth0SettingsAccessor, httpMessageHandlerAccessor, loggerFactory);
             app.UseMvc();
         }
     }
