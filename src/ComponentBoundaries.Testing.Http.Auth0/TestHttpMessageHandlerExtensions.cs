@@ -17,8 +17,9 @@ namespace ComponentBoundaries.Testing.Http.Auth0
             TestTokenService tokenService)
         {
             var jwksUri = new Uri(new Uri(appSettings.Auth0Domain), WellKnownJwks);
-            testHttpMessageHandler.AddResponse(jwksUri,
-                HttpStatusCode.OK, new Jwks
+            testHttpMessageHandler.PushResponse(jwksUri,
+                HttpStatusCode.OK,
+                new Jwks
                 {
                     Keys = new List<Key>
                     {
@@ -33,9 +34,11 @@ namespace ComponentBoundaries.Testing.Http.Auth0
                             }
                         }
                     }
-                });
+                },
+                true
+            );
 
-            testHttpMessageHandler.AddResponse(new Uri(new Uri(appSettings.Auth0Domain), WellKnownOpenIdConfiguartion),
+            testHttpMessageHandler.PushResponse(new Uri(new Uri(appSettings.Auth0Domain), WellKnownOpenIdConfiguartion),
                 HttpStatusCode.OK,
                 new OpenIdConfiguration
                 {
@@ -45,7 +48,8 @@ namespace ComponentBoundaries.Testing.Http.Auth0
                     {
                         "RS256"
                     }
-                }
+                },
+                true
             );
         }
     }

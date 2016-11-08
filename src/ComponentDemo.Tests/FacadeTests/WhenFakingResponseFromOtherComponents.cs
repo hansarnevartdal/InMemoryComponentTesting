@@ -29,7 +29,7 @@ namespace ComponentTesting.Demo.Tests.FacadeTests
             });
 
             var httpMessageHandler = new TestHttpMessageHandler();
-            httpMessageHandler.AddResponse(new Uri(new Uri(otherComponentBaseUrl), "/secret"), HttpStatusCode.OK, "Mellon!" );
+            httpMessageHandler.PushResponse(new Uri(new Uri(otherComponentBaseUrl), "/secret"), HttpStatusCode.OK, "Mellon!" );
             var fixture = new AuthorizedTestFixture<DemoStartup>(httpMessageHandler: httpMessageHandler, serviceCollection: serviceCollection);
             
             // Act
@@ -54,7 +54,7 @@ namespace ComponentTesting.Demo.Tests.FacadeTests
             });
 
             var httpMessageHandler = new TestHttpMessageHandler();
-            httpMessageHandler.AddResponse(new Uri(new Uri(otherComponentBaseUrl), "/secret"), HttpStatusCode.BadRequest, "You are saying it wrong!");
+            httpMessageHandler.PushResponse(new Uri(new Uri(otherComponentBaseUrl), "/secret"), HttpStatusCode.BadRequest, "You are saying it wrong!");
             var fixture = new AuthorizedTestFixture<DemoStartup>(httpMessageHandler: httpMessageHandler, serviceCollection: serviceCollection);
 
             // Act
