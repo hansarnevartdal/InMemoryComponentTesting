@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Component.Demo.Facades;
 using Microsoft.AspNetCore.Authorization;
@@ -44,6 +45,14 @@ namespace Component.Demo.Controllers
         public async Task<string> GetOtherSecret()
         {
             return await _otherComponentFacade.GetSecret();
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("other/data")]
+        public async Task<string> PostOtherData(List<string> data)
+        {
+            return await _otherComponentFacade.PostData(data);
         }
     }
 }

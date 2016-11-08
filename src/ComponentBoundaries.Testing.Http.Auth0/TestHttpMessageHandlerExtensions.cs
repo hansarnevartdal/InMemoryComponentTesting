@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using ComponentBoundaries.Http.Auth0.Settings;
 using ComponentBoundaries.Testing.Http.Auth0.Models;
 
@@ -17,7 +18,8 @@ namespace ComponentBoundaries.Testing.Http.Auth0
             TestTokenService tokenService)
         {
             var jwksUri = new Uri(new Uri(appSettings.Auth0Domain), WellKnownJwks);
-            testHttpMessageHandler.PushResponse(jwksUri,
+            testHttpMessageHandler.PushGetResponse(
+                jwksUri,
                 HttpStatusCode.OK,
                 new Jwks
                 {
@@ -38,7 +40,8 @@ namespace ComponentBoundaries.Testing.Http.Auth0
                 true
             );
 
-            testHttpMessageHandler.PushResponse(new Uri(new Uri(appSettings.Auth0Domain), WellKnownOpenIdConfiguartion),
+            testHttpMessageHandler.PushGetResponse(
+                new Uri(new Uri(appSettings.Auth0Domain), WellKnownOpenIdConfiguartion),
                 HttpStatusCode.OK,
                 new OpenIdConfiguration
                 {

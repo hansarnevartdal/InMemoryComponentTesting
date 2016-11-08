@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Component.Demo.Settings;
 using ComponentBoundaries.Http;
 using Microsoft.Extensions.Options;
+using ComponentBoundaries.Http.Helpers;
 
 namespace Component.Demo.Facades
 {
@@ -29,6 +32,20 @@ namespace Component.Demo.Facades
 
             var secret = await response.Content.ReadAsStringAsync();
             return secret;
+        }
+
+        public async Task<string> PostData(List<string> data)
+        {
+            var httpClient = _httpClientFactory.GetHttpClient(new Uri(_appSettings.OtherComponentBaseUrl));
+            var response = await httpClient.PostAsJsonAsync("/data", data);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("Could not post data to other!");
+            }
+
+            var receipt = await response.Content.ReadAsStringAsync();
+            return receipt;
         }
     }
 }
